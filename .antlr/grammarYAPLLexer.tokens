@@ -1,0 +1,17 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+Type=5
+True=6
+False=7
+Int=8
+Smallcomment=9
+Bigcomment=10
+Class=11
+';'=1
+'a'=2
+'c'=3
+'b'=4
+'true'=6
+'false'=7

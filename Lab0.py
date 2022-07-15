@@ -6,10 +6,10 @@ Mario Perdomo Carnet 18029
 Laboratorio 0
 """
 import sys
-from antlr4 import *
-from dist.grammarTestLexer import grammarTestLexer
-from dist.grammarTestParser import grammarTestParser
-from dist.grammarTestVisitor import grammarTestVisitor
+import os
+#from antlr4 import *
+
+
 # | ----- How to create a env ----- |
 # python -m venv  path
 # ./scripts/activate 
