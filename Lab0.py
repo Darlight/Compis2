@@ -8,8 +8,11 @@ Laboratorio 0
 import sys
 import os
 from antlr4 import *
-from newGrammar.grammarYAPLLexer import grammarYAPLLexer
-from newGrammar.grammarYAPLParser import grammarYAPLParser
+from newGrammarPython.grammarYAPLLexer import grammarYAPLLexer
+from newGrammarPython.grammarYAPLParser import grammarYAPLParser
+from newGrammarPython.grammarYAPLVisitor import grammarYAPLVisitor
+from newGrammarPython.grammarYAPLCustomErrorListener import grammarYAPLCustomErrorListener
+from newGrammarPython.grammarYAPLListener import grammarYAPLListener
 #antlr -Dlanguage=Python 3  [grammarfile.g4] -o newGrammar
 #pip install antlr4-python3-runtime
 # | ----- How to create a env ----- |
@@ -17,13 +20,40 @@ from newGrammar.grammarYAPLParser import grammarYAPLParser
 # ./scripts/activate 
 # | ----- ==================== ----- |
 
-def main(argv):
+def read_types(file_name):
+    with open(file_name, 'r') as file:
+        lines = file.readlines()
+        tokens = list(filter(lambda token: "'" not in token, lines))
+        tokens = list(map(lambda token: token.split('=')[0], tokens))
+
+        return tokens
+
+def main(file: str, token_list: list):
     """Main method calling a single debugger for an input script"""
-    parser = grammarYAPLParser
-    parser.parse(argv)
+
+    test = FileStream(file_name)
+    lexer = grammarYAPLLexer(test)
+    stream = CommonTokenStream(lexer)
+    parser = grammarYAPLParser(stream)
+    parser.addErrorListener(grammarYAPLCustomErrorListener())
+    tree = parser.program()
+    printer = grammarYAPLListener()
+    walker = ParseTreeWalker()
+    walker.walk(printer, tree)
+
+
+    
+
 
 if __name__ == '__main__':
-    main(sys.argv) 
+    posible_tokens = read_types('newGrammarPython/grammarYapl.tokens')
+    file_name = 'newGrammar/test.cl'
+    main(file_name, posible_tokens) 
+
+
+
+
+
 
 """
 def get_username():

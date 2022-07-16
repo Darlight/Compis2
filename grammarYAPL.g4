@@ -45,7 +45,7 @@ POINT: '.' ;
 ERROR: . -> skip ;
 
 // |--- Parser Rules ---|
-program:  (create_class)+ EOF;
+program:  (create_class SEMICOLON)+ EOF;
 
 create_class: CLASS TYPE (INHERITS TYPE)? '{' (feature SEMICOLON )+ '}' ;
 
