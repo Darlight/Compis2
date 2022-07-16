@@ -8,6 +8,8 @@ Laboratorio 0
 import sys
 import os
 from antlr4 import *
+from newGrammar.grammarYAPLLexer import grammarYAPLLexer
+from newGrammar.grammarYAPLParser import grammarYAPLParser
 #antlr -Dlanguage=Python 3  [grammarfile.g4] -o newGrammar
 #pip install antlr4-python3-runtime
 # | ----- How to create a env ----- |
@@ -15,9 +17,15 @@ from antlr4 import *
 # ./scripts/activate 
 # | ----- ==================== ----- |
 
-print("test")
+def main(argv):
+    """Main method calling a single debugger for an input script"""
+    parser = grammarYAPLParser
+    parser.parse(argv)
 
+if __name__ == '__main__':
+    main(sys.argv) 
 
+"""
 def get_username():
     from winpwd import getpwuid
     from os import getuid
@@ -66,4 +74,6 @@ if __name__ == "__main__":
         visitor = MyVisitor()
         output = visitor.visit(tree)
         print(output)
+
+"""
 

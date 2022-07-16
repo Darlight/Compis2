@@ -55,26 +55,26 @@ feature: (ID '(' (formal ','?)* ')' ':' TYPE '{' expr '}' )
 
 formal: ID ':' TYPE;
 
-expr: ID '<-' expr
-    | expr '(' (expr ','?)+ ')'
-    | expr ('@' TYPE)? '.' ID '(' expr (',' expr)* ')'
+expr: ID '<-' expr #Assign
+    | expr '(' (expr ','?)+ ')' #self
+    | expr ('@' TYPE)? '.' ID '(' expr (',' expr)* ')' #dispatch
     | IF expr THEN expr ELSE expr FI #IFs
     | WHILE expr LOOP expr POOL #Loops
-    | '{' (expr SEMICOLON)+ '}'
-    | 'let' ID ':' TYPE ('<-' expr)? (',' ID ':' TYPE '<-' expr)* IN expr
-    | NEW TYPE
-    | ISVOID expr
+    | '{' (expr SEMICOLON)+ '}' #Content
+    | 'let' ID ':' TYPE ('<-' expr)? (',' ID ':' TYPE '<-' expr)* IN expr #CreateVar
+    | NEW TYPE #NewType
+    | ISVOID expr #Void
     | left=expr op=('*'|'/') right=expr #MultandDiv
     | left=expr op=('+'|'-') right=expr #SumandMinus
-    | '~' expr
-    | expr '<' expr
-    | expr '<=' expr
-    | expr '=' expr
-    | NOT expr
-    | '(' expr ')'
-    | ID
-    | INT
-    | STRING
-    | TRUE
-    | FALSE
+    | '~' expr #InverseBits
+    | expr '<' expr #GreaterThan
+    | expr '<=' expr #GreaterThanorEqual
+    | expr '=' expr #Equal
+    | NOT expr #Not
+    | '(' expr ')' #Paranthesis
+    | ID #ID
+    | INT #INT
+    | STRING #STRING
+    | TRUE #BoolTru
+    | FALSE #BoolFal
     ;
