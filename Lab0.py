@@ -7,9 +7,9 @@ Laboratorio 0
 """
 import sys
 import os
-#from antlr4 import *
-
-
+from antlr4 import *
+#antlr -Dlanguage=Python 3  [grammarfile.g4] -o newGrammar
+#pip install antlr4-python3-runtime
 # | ----- How to create a env ----- |
 # python -m venv  path
 # ./scripts/activate 
